@@ -1,5 +1,5 @@
 ### notes
-```
+```jsx
 const Jstests = (props) => {
   let greetings = ['hi', 'hello', 'sup']
   greetings.push('yo')
