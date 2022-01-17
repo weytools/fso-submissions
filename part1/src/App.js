@@ -29,7 +29,16 @@ const App = () => {
     )
   }
 
-  const StatsLine = (props) => <p>{props.label}: {props.data}</p>
+  const StatsLine = (props) => {
+    return(
+    <tbody>
+      <tr>
+        <td>{props.label}</td>
+        <td>{props.data}</td>
+      </tr>
+    </tbody>
+    )
+  }
 
   const Statistics = (props) => {
 
@@ -48,12 +57,14 @@ const App = () => {
     return (
       <div>
         <h2>Statistics</h2>
+        <table>
           <StatsLine label={"Good"} data={good} />
           <StatsLine label={"Neutral"} data={neutral} />
           <StatsLine label={"Bad"} data={bad} />
           <StatsLine label={"All"} data={good + neutral + bad} />
           <StatsLine label={"Average"} data={(good - bad)/(good+bad)} />
           <StatsLine label={"Positive"} data={(good/(good + neutral + bad))*100 + '%'} />
+        </table>
       </div>
     )
   }
