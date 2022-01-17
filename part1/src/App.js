@@ -28,6 +28,18 @@ const App = () => {
       <button onClick={props.handleClick}>{props.label}</button>
     )
   }
+
+  const Statistics = (props) => {
+
+    const [good, neutral, bad] = props.data
+    return (
+      <div>
+        <h2>Statistics</h2>
+        <h4>Good: {good} | Neutral: {neutral} | Bad: {bad}</h4>
+        <h5>All: {good + neutral + bad} | Average: {(good - bad)/(good+bad)} | Positive: {(good/(good + neutral + bad))*100}%</h5>
+      </div>
+    )
+  }
   return (
     <div>
       <h2>Give Feedback</h2>
@@ -35,9 +47,7 @@ const App = () => {
       <FeedbackButton handleClick={()=>newFeedback('neutral')} label={'Neutral'} />
       <FeedbackButton handleClick={()=>newFeedback('bad')} label={'Bad'} />
       <hr/>
-      <h2>Statistics</h2>
-      <h4>Good: {good} | Neutral: {neutral} | Bad: {bad}</h4>
-      <h5>All: {good + neutral + bad} | Average: {(good - bad)/(good+bad)} | Positive: {(good/(good + neutral + bad))*100}%</h5>
+      <Statistics data={[good, neutral, bad]}/>
     </div>
   )
 }
