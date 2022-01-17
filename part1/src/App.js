@@ -1,5 +1,5 @@
 import { checkPropTypes } from 'prop-types'
-import React from 'react'
+import React, {Component, useState} from 'react'
 
 const Header = (props) => {
   return(
@@ -46,14 +46,44 @@ const App = () => {
     ]
   }
 
+  const [counter, setCounter] = useState(0)
+
+  const clickCounter = () => setCounter(counter+20)
+  const resetCounter = () => setCounter(0)
+
   return (
     <div>
       <Header course={course}/>
       <Content parts={course.parts}/>
       <Total parts={course.parts}/>
+      <hr/>
+      <Learning counter={counter} letters='wow'/>
+      <CounterButton clicker={clickCounter} text={"Add 20"}/>
+      <CounterButton clicker={resetCounter} text={"Reset"}/>
     </div>
   )
 }
+
+
+
+const Learning = (props) => {
+
+  return (
+    <div>
+      <p>{props.counter}</p>
+      <p>{props.letters}</p>
+    </div>
+  )
+}
+
+const CounterButton = (props) => {
+  const {clicker, text} = props
+  return (
+    <button onClick={clicker}>{text}</button>
+  )
+
+}
+
 
 
 

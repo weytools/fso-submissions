@@ -1,5 +1,28 @@
 ### notes
 ```jsx
+const ClassTest = (props) => {
+  class Insect {
+    constructor(name, species, bugType, color){
+      this.name = name
+      this.species = species
+      this.bugType = bugType
+      this.color = color
+    }
+    describe() {
+      return 'Hello, I am ' + this.name + ' the ' + this.species + '. I am a ' + this.color + ' ' + this.bugType
+    }
+  }
+
+  const bug1 = new Insect('bill', 'hornet', 'bee', 'yellow')
+  const bug2 = new Insect('henry', 'huntsman', 'spider', 'brown')
+  return (
+  <div>
+    <p>{bug1.describe()}</p>
+    <p>{bug2.describe()}</p>
+  </div>
+  )
+}
+
 const Jstests = (props) => {
   let greetings = ['hi', 'hello', 'sup']
   greetings.push('yo')
