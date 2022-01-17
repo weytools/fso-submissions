@@ -36,9 +36,8 @@ const App = () => {
       <FeedbackButton handleClick={()=>newFeedback('bad')} label={'Bad'} />
       <hr/>
       <h2>Statistics</h2>
-      <p>Good: {good}</p>
-      <p>Neutral: {neutral}</p>
-      <p>Bad: {bad}</p>
+      <h4>Good: {good} | Neutral: {neutral} | Bad: {bad}</h4>
+      <h5>All: {good + neutral + bad} | Average: {(good - bad)/(good+bad)} | Positive: {(good/(good + neutral + bad))*100}%</h5>
     </div>
   )
 }
