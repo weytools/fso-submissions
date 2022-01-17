@@ -32,6 +32,17 @@ const App = () => {
   const Statistics = (props) => {
 
     const [good, neutral, bad] = props.data
+
+    if (good + neutral + bad == 0){
+      return (
+        <div>
+          <h2>Statistics</h2>
+          <h4>No feedback given</h4>
+        </div>
+      )
+    }
+
+
     return (
       <div>
         <h2>Statistics</h2>
