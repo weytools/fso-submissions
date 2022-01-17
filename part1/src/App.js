@@ -1,90 +1,46 @@
-import { checkPropTypes } from 'prop-types'
-import React, {Component, useState} from 'react'
-
-const Header = (props) => {
-  return(
-    <h1>{props.course.name}</h1>
-  )
-}
-
-const Content = (props) => {
-  console.log(props.parts)
-  return(
-    <div>
-      {props.parts.map( p => <Part partName={p.name} partExercises={p.exercises}/>)}
-    </div>
-  )
-}
-const Part = (props) =>
-(
-  <p>{props.partName} {props.partExercises}</p>
-)
-const Total = (props) => {
-  const totalNumber = props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises
-  return(
-  <p>Number of exercises {totalNumber}</p>
-  )
-}
+import React, { useState } from 'react'
 
 const App = () => {
-  const course = 
+  // save clicks of each button to its own state
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+
+
+  const newFeedback = (feedback) =>
   {
-    name: 'Half Stack application development',
-    parts: [
-      {
-        name: 'Fundamentals of React',
-        exercises: 10
-      },
-      {
-        name: 'Using props to pass data',
-        exercises: 7
-      },
-      {
-        name: 'State of a component',
-        exercises: 14
-      }
-    ]
+    switch (feedback) {
+      case 'good':
+        setGood(good+1)        
+        break;
+      case 'neutral':
+        setNeutral(neutral+1)        
+        break;
+      case 'bad':
+        setBad(bad+1)        
+        break;
+      default:
+        break;
+    }
   }
-
-  const [counter, setCounter] = useState(0)
-
-  const clickCounter = () => setCounter(counter+20)
-  const resetCounter = () => setCounter(0)
-
+  const FeedbackButton = (props) =>{
+    return(
+      <button onClick={props.handleClick}>{props.label}</button>
+    )
+  }
   return (
     <div>
-      <Header course={course}/>
-      <Content parts={course.parts}/>
-      <Total parts={course.parts}/>
+      <h2>Give Feedback</h2>
+      <FeedbackButton handleClick={()=>newFeedback('good')} label={'Good'} />
+      <FeedbackButton handleClick={()=>newFeedback('neutral')} label={'Neutral'} />
+      <FeedbackButton handleClick={()=>newFeedback('bad')} label={'Bad'} />
       <hr/>
-      <Learning counter={counter} letters='wow'/>
-      <CounterButton clicker={clickCounter} text={"Add 20"}/>
-      <CounterButton clicker={resetCounter} text={"Reset"}/>
+      <h2>Statistics</h2>
+      <p>Good: {good}</p>
+      <p>Neutral: {neutral}</p>
+      <p>Bad: {bad}</p>
     </div>
   )
 }
-
-
-
-const Learning = (props) => {
-
-  return (
-    <div>
-      <p>{props.counter}</p>
-      <p>{props.letters}</p>
-    </div>
-  )
-}
-
-const CounterButton = (props) => {
-  const {clicker, text} = props
-  return (
-    <button onClick={clicker}>{text}</button>
-  )
-
-}
-
-
-
 
 export default App
