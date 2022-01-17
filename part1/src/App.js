@@ -14,12 +14,13 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(initVotes)
+  const [popular, setPopular] = useState(0)
 
   const getRandomAnecdote = (currentIndex) => {
     // generate random index
     // do again if same as current
     let newIndex = currentIndex;
-    while (newIndex == currentIndex) {
+    while (newIndex === currentIndex) {
       newIndex = Math.floor(Math.random() * anecdotes.length)
     }
     // set state to new number
@@ -29,18 +30,25 @@ const App = () => {
     const newVotes = [...votes]
     newVotes[currentIndex] += 1
     setVotes(newVotes)
+
+    if (newVotes[currentIndex] > newVotes[popular]){
+      setPopular(currentIndex)
+    }
   }
 
   const AnecdoteButton = (props) => <button onClick={props.handleClick}>{props.label}</button>
 
   return (
     <div>
-      <h3>{anecdotes[selected]}</h3>
-      <p>Has {votes[selected]} votes</p>
+      <h4>daily anecdote // apathy antidote</h4>
+      <blockquote>&ldquo;<em>{anecdotes[selected]}</em>&rdquo;</blockquote>
+      <h5>{votes[selected]} votes</h5>
       <p>
-        <AnecdoteButton handleClick={()=>getRandomAnecdote(selected)} label='Get another anecdote'/>
+        <AnecdoteButton handleClick={()=>getRandomAnecdote(selected)} label='Get another anecdote'/>&nbsp;
         <AnecdoteButton handleClick={()=>voteForAnecdote(selected)} label='Vote for this anecdote'/>
-        </p>
+      </p>
+      <h4>most popular // {votes[popular]} votes</h4>
+      <blockquote>&ldquo;<em>{anecdotes[popular]}</em>&rdquo;</blockquote>
     </div>
   )
 }
