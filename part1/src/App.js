@@ -29,6 +29,8 @@ const App = () => {
     )
   }
 
+  const StatsLine = (props) => <p>{props.label}: {props.data}</p>
+
   const Statistics = (props) => {
 
     const [good, neutral, bad] = props.data
@@ -46,8 +48,12 @@ const App = () => {
     return (
       <div>
         <h2>Statistics</h2>
-        <h4>Good: {good} | Neutral: {neutral} | Bad: {bad}</h4>
-        <h5>All: {good + neutral + bad} | Average: {(good - bad)/(good+bad)} | Positive: {(good/(good + neutral + bad))*100}%</h5>
+          <StatsLine label={"Good"} data={good} />
+          <StatsLine label={"Neutral"} data={neutral} />
+          <StatsLine label={"Bad"} data={bad} />
+          <StatsLine label={"All"} data={good + neutral + bad} />
+          <StatsLine label={"Average"} data={(good - bad)/(good+bad)} />
+          <StatsLine label={"Positive"} data={(good/(good + neutral + bad))*100 + '%'} />
       </div>
     )
   }
