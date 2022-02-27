@@ -1,13 +1,15 @@
-import './App.css';
-var element2 = "wow"
-console.log('%c%s', 'color: #ff0000', element2)
-console.log(`%c${element2}`, 'color: #ff000050' )
-function App() {
+import  Note  from "./components/Note";
+const App = ({notes}) => {
+
   return (
     <div>
-      <p>{element}</p>
+      <h1>Notes</h1>
+      <ul>
+        {notes.map(note=>
+          <Note key={note.id} note={note}/>)}
+      </ul>
     </div>
-  );
+  )
 }
 
 export default App;
